@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”>
+<html xmlns=”http://www.w3.org/1999/xhtml”>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+
+<script data-ad-client="ca-pub-6708300535856225" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link rel="stylesheet" href="style.css" type="text/css">
+<title>9月29日線上簽到系統</title>
+
+    
+    <script src="https://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+    <script language="javascript">
+        function checkin(){
+            var get_who=0;
+            now = new Date();
+            h = now.getHours();
+            //幫小時補0
+            if (h < 10){
+                h = "0" + h ;
+            }
+            //幫分鐘補0
+            m = now.getMinutes();
+            if (m < 10){
+                m = "0" + m ;
+            }
+            
+            //將輸入的數值加密，以免個資外洩
+            var ck=md5(check.value);
+            
+                    
+        if(ck=='528226d422b003bce28af6446108fc1d' || ck=='0cde80d4d65fc5307a07f86ac9dfa34c' || ck=='528226d422b003bce28af6446108fc1d' || ck=='528226d422b003bce28af6446108fc1d'){
+            check_list.value += "[" + h + ":" + m + "]丁維廉\n";
+            hidden_list.value += "[" + h + ":" + m + "],,,,,丁維廉\n";
+            who_check.innerHTML = "<font color='green'>" + h + ":" + m + "</font><br>丁維廉";
+            get_who=1;
+        }
+        
+        if(ck=='e9b1ad953dcf5fd357195adadc014066' || ck=='0cde80d4d65fc5307a07f86ac9dfa34c' || ck=='e9b1ad953dcf5fd357195adadc014066' || ck=='e9b1ad953dcf5fd357195adadc014066'){
+            check_list.value += "[" + h + ":" + m + "]丁立文\n";
+            hidden_list.value += "[" + h + ":" + m + "],,,,,丁立文\n";
+            who_check.innerHTML = "<font color='dark blue'>" + h + ":" + m + "</font><br>丁立文";
+            get_who=1;
+        }
+        
+        if(ck=='69e183eab89aadbc62c25d7ad260c199' || ck=='0cde80d4d65fc5307a07f86ac9dfa34c' || ck=='69e183eab89aadbc62c25d7ad260c199' || ck=='69e183eab89aadbc62c25d7ad260c199'){
+            check_list.value += "[" + h + ":" + m + "]劉異曲\n";
+            hidden_list.value += "[" + h + ":" + m + "],,,,,劉異曲\n";
+            who_check.innerHTML = "<font color='green'>" + h + ":" + m + "</font><br>劉異曲";
+            get_who=1;
+        }
+        
+        if(ck=='4e17f800ea5ef44af240ef0115a07210' || ck=='35bd9d14efddde838aa2b0a8c9426964' || ck=='4e17f800ea5ef44af240ef0115a07210' || ck=='4e17f800ea5ef44af240ef0115a07210'){
+            check_list.value += "[" + h + ":" + m + "]丁翊庭\n";
+            hidden_list.value += "[" + h + ":" + m + "],,,,,丁翊庭\n";
+            who_check.innerHTML = "<font color='blue'>" + h + ":" + m + "</font><br>丁翊庭";
+            get_who=1;
+        }
+        
+        if(ck=='bdd4e304a72ce8afd1beb7e2f7a808ce' || ck=='35bd9d14efddde838aa2b0a8c9426964' || ck=='bdd4e304a72ce8afd1beb7e2f7a808ce' || ck=='bdd4e304a72ce8afd1beb7e2f7a808ce'){
+            check_list.value += "[" + h + ":" + m + "]丁翊菲\n";
+            hidden_list.value += "[" + h + ":" + m + "],,,,,丁翊菲\n";
+            who_check.innerHTML = "<font color='purple'>" + h + ":" + m + "</font><br>丁翊菲";
+            get_who=1;
+        }
+        
+        if(ck=='70f638907a795f5e1c66434f5574e79e' || ck=='35bd9d14efddde838aa2b0a8c9426964' || ck=='70f638907a795f5e1c66434f5574e79e' || ck=='70f638907a795f5e1c66434f5574e79e'){
+            check_list.value += "[" + h + ":" + m + "]丁維德\n";
+            hidden_list.value += "[" + h + ":" + m + "],,,,,丁維德\n";
+            who_check.innerHTML = "<font color='blue'>" + h + ":" + m + "</font><br>丁維德";
+            get_who=1;
+        }
+        
+        if(ck=='8418604ea573578ddfef0106c4d99830' || ck=='35bd9d14efddde838aa2b0a8c9426964' || ck=='8418604ea573578ddfef0106c4d99830' || ck=='8418604ea573578ddfef0106c4d99830'){
+            check_list.value += "[" + h + ":" + m + "]彭曉珍\n";
+            hidden_list.value += "[" + h + ":" + m + "],,,,,彭曉珍\n";
+            who_check.innerHTML = "<font color='green'>" + h + ":" + m + "</font><br>彭曉珍";
+            get_who=1;
+        }
+
+            
+            //如果都沒有人
+            if(get_who==0){
+                who_check.innerHTML = "<font color='red'>⚠️查無此人，請重新輸入</font>";
+            }
+            
+            //清掉上一次輸入欄位內容
+            check.value="";
+        }
+    </script>
+
+    <script language="javascript">
+        function clipboard(){
+            hidden_list.style.display="block";
+            hidden_list.select();
+            document.execCommand("copy");
+            hidden_list.style.display="none";
+            alert("成功複製簽到點名到剪貼簿！");
+        }
+    </script>
+</head>
+<body>
+<center>
+
+<script language="javascript">
+    //暫時廢止定位功能
+    //window.onload=show_donatebar; //網頁載入完畢後執行
+    //window.onresize=show_donatebar; //網頁更改尺寸大小後執行
+    //function show_donatebar(){
+    //    lp=window.outerWidth / 2 - 85; //取得瀏覽器中間位置，減去贊助區長度的一半
+    //    donatebar.style.left= lp;
+    //}
+    function show_blog(){
+        if(blog.innerHTML==""){
+            blog.innerHTML="<iframe width='100%' height='100%' style='position: fixed; top: 20px; right: 0px;' src='https://johnny-note.blogspot.com/'></iframe>";
+            donatebar.innerHTML="<center>再按一次可關閉</center>";
+        }else{
+            blog.innerHTML="";
+            donatebar.innerHTML="<center>您的鼓勵是作者最大的動力，請點&nbsp;<img width='16' src='https://www.php-pie.net/images/icons-blogger-02.png' title='給作者打氣(看一下部落格)'>&nbsp;或點擊廣告</center>";
+        }
+    }
+</script>
+<div id="donatebar" style="z-index: 99; position: fixed; font-size: 12pt; top: 0px; left: 0px; width: 100%; border: 0px solid; font-weight: 600; background: #F4F4F4;">
+ 
+</div>
+<div id="blog" style="position: absolute; z-index: 99999;"></div><br>
+<h2>9月29日線上簽到系統</h2>
+僅供「步行貓」使用<br>
+
+<p>    
+            <a href="javascript: history.go(-1);">回上一頁</a>
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <center><div id="who_check" style="border: 1px solid; width: 100%; height: 130px; vertical-align: middle; font-size: 36pt; color: blue; font-weight: 600;"></div></center>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" width="220">
+                        <b>掃描或輸入簽到點名</b><br>
+                        <input id="check" type="text" onkeyup="javascript: if(event.keyCode==13){checkin();}"><br>
+                        說明：<br>
+                        僅供烤肉活動使用。
+                    </td>
+                    <td valign="top">
+                        <b>已簽到的名單</b>&nbsp;<input type="button" value="點我複製資料" onclick="javascript: clipboard();"><br>
+                        <textarea id="check_list" style="resize: none; font-size: 14pt; font-family: "微軟正黑體", Verdana;" rows="15" cols="28" readonly></textarea>
+                        <textarea id="hidden_list" style="display: none;" readonly></textarea>
+                    </td>
+                </tr>
+            </table></p>
+
+
+
+</center>
+</body>
+</html>
