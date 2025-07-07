@@ -68,7 +68,7 @@ speechSynthesis.onvoiceschanged = loadVoices;
 function sayParts(name) {
     const part1 = new SpeechSynthesisUtterance(name);
     part1.lang = 'zh-TW';
-    part1.rate = 1.1;
+    part1.rate = 1.0;
     if (googleVoice) part1.voice = googleVoice;
 
     const part2 = new SpeechSynthesisUtterance("報到成功");
