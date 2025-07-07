@@ -73,7 +73,7 @@ function sayParts(name) {
 
     const part2 = new SpeechSynthesisUtterance("報到成功");
     part2.lang = 'zh-TW';
-    part2.rate = 1.0;
+    part2.rate = 0.8;
     if (googleVoice) part2.voice = googleVoice;
 
     speechSynthesis.speak(part1);
