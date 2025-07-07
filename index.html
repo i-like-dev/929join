@@ -1,141 +1,176 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<title>簽到系統</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>簽到系統</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+  <style>
     body {
-        font-family: '微軟正黑體', sans-serif;
-        background: #f5f8ff;
-        text-align: center;
-        margin: 0;
-        padding: 2rem;
+      font-family: '微軟正黑體', sans-serif;
+      background: #f0f4ff;
+      padding: 2rem;
+      text-align: center;
     }
-    h2 {
-        color: #2b4b8a;
+    h1 {
+      color: #2c3e50;
     }
-    input[type="text"] {
-        font-size: 20px;
-        padding: 10px;
-        width: 250px;
-        border: 2px solid #ccc;
-        border-radius: 8px;
+    #subtitle, #time {
+      margin: 0.5rem;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    #check {
+      padding: 10px;
+      font-size: 18px;
+      width: 250px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
     }
     input[type="button"] {
-        padding: 8px 16px;
-        font-size: 16px;
-        background-color: #2b4b8a;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
+      margin: 8px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #2b4b8a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
     }
     input[type="button"]:hover {
-        background-color: #3c5cad;
-    }
-    textarea {
-        font-size: 16px;
-        width: 100%;
-        max-width: 400px;
-        margin-top: 10px;
-        border-radius: 8px;
-        border: 1px solid #aaa;
-        padding: 10px;
-        resize: none;
+      background: #3d5ca9;
     }
     #who_check {
-        height: 120px;
-        font-size: 36pt;
-        font-weight: bold;
-        color: #2b4b8a;
-        margin-bottom: 20px;
+      font-size: 36pt;
+      font-weight: bold;
+      color: #2b4b8a;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      min-height: 100px;
     }
-</style>
+    textarea {
+      margin-top: 10px;
+      font-size: 14pt;
+      padding: 10px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      resize: none;
+    }
+  </style>
 
-<script>
-let googleVoice = null;
-let codeMap = {}; // from JSON
+  <script>
+    let config = {};
+    let googleVoice = null;
 
-function loadVoices() {
-    const voices = speechSynthesis.getVoices();
-    googleVoice = voices.find(v => v.name.includes("Google") && v.lang === "zh-TW") 
-                || voices.find(v => v.lang === "zh-TW");
-}
-speechSynthesis.onvoiceschanged = loadVoices;
+    function loadVoices() {
+      const voices = speechSynthesis.getVoices();
+      googleVoice = voices.find(v => v.name.includes("Google") && v.lang === "zh-TW")
+                    || voices.find(v => v.lang === "zh-TW");
+    }
+    speechSynthesis.onvoiceschanged = loadVoices;
 
-function sayParts(name) {
-    const part1 = new SpeechSynthesisUtterance(name);
-    part1.lang = 'zh-TW';
-    part1.rate = 1.0;
-    if (googleVoice) part1.voice = googleVoice;
+    function sayParts(name) {
+      const namePart = new SpeechSynthesisUtterance(name);
+      namePart.lang = 'zh-TW';
+      namePart.rate = 1.1;
+      if (googleVoice) namePart.voice = googleVoice;
 
-    const part2 = new SpeechSynthesisUtterance("報到成功");
-    part2.lang = 'zh-TW';
-    part2.rate = 0.8;
-    if (googleVoice) part2.voice = googleVoice;
+      const successPart = new SpeechSynthesisUtterance("報到成功");
+      successPart.lang = 'zh-TW';
+      successPart.rate = 1.0;
+      if (googleVoice) successPart.voice = googleVoice;
 
-    speechSynthesis.speak(part1);
-    speechSynthesis.speak(part2);
-}
+      speechSynthesis.speak(namePart);
+      speechSynthesis.speak(successPart);
+    }
 
-function normalize(str) {
-    return str.trim().toLowerCase();
-}
+    function normalize(str) {
+      return str.trim().toLowerCase();
+    }
 
-function checkin() {
-    const now = new Date();
-    const h = String(now.getHours()).padStart(2, '0');
-    const m = String(now.getMinutes()).padStart(2, '0');
+    function checkin() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
 
-    const inputCode = normalize(document.getElementById("check").value);
-    const name = codeMap[inputCode];
+      const inputCode = normalize(document.getElementById("check").value);
+      const name = config.codes[inputCode];
 
-    if (name) {
+      if (name) {
         document.getElementById("check_list").value += `[${h}:${m}]${name}\n`;
-        document.getElementById("hidden_list").value += `[${h}:${m}],,,,,${name}\n`;
+        document.getElementById("hidden_list").value += `${h}:${m},${name}\n`;
         document.getElementById("who_check").innerHTML = `${h}:${m}<br>${name}`;
         sayParts(name);
-    } else {
+      } else {
         document.getElementById("who_check").innerHTML = "<font color='red'>⚠️ 查無此代號</font>";
+      }
+
+      document.getElementById("check").value = "";
     }
 
-    document.getElementById("check").value = "";
-}
+    function clipboard() {
+      const hidden = document.getElementById("hidden_list");
+      hidden.style.display = "block";
+      hidden.select();
+      document.execCommand("copy");
+      hidden.style.display = "none";
+      alert("已複製到剪貼簿！");
+    }
 
-function clipboard() {
-    const hidden = document.getElementById("hidden_list");
-    hidden.style.display = "block";
-    hidden.select();
-    document.execCommand("copy");
-    hidden.style.display = "none";
-    alert("已複製到剪貼簿！");
-}
+    function downloadCSV() {
+      const csvContent = "data:text/csv;charset=utf-8,\uFEFF時間,姓名\n" + 
+                         document.getElementById("hidden_list").value;
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      const today = new Date().toISOString().split("T")[0];
+      link.setAttribute("download", `簽到名單_${today}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
 
-function loadJSON() {
-    fetch("codes.json")
-    .then(res => res.json())
-    .then(data => {
-        codeMap = data;
-    }).catch(err => {
-        alert("載入代號資料失敗：" + err);
-    });
-}
+    function updateTime() {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById("time").textContent = `🕒 現在時間：${hh}:${mm}:${ss}`;
+    }
 
-window.onload = loadJSON;
-</script>
+    function loadConfig() {
+      fetch("config.json")
+        .then(response => response.json())
+        .then(data => {
+          config = data;
+          document.getElementById("title").textContent = data.title;
+          document.getElementById("subtitle").textContent = data.session;
+        })
+        .catch(err => alert("無法載入設定檔：", err));
+    }
+
+    window.onload = function () {
+      loadConfig();
+      updateTime();
+      setInterval(updateTime, 1000);
+    };
+  </script>
 </head>
 
 <body>
-    <h2>簽到系統</h2>
-    <p>請輸入編號</p>
-    
-    <div id="who_check"></div>
-    <input id="check" type="text" placeholder="請輸入代號" onkeyup="if(event.keyCode==13) checkin();"><br><br>
+  <h1 id="title">讀取中...</h1>
+  <div id="subtitle">請稍候</div>
+  <div id="time">🕒 現在時間：--:--:--</div>
 
-    <input type="button" value="複製簽到名單" onclick="clipboard();"><br><br>
-    <textarea id="check_list" rows="10" readonly></textarea>
-    <textarea id="hidden_list" style="display:none;" readonly></textarea>
+  <input id="check" type="text" placeholder="請輸入代號" onkeyup="if(event.keyCode==13) checkin();"><br>
+  <input type="button" value="複製簽到名單" onclick="clipboard();">
+  <input type="button" value="下載 CSV" onclick="downloadCSV();">
+
+  <div id="who_check"></div>
+
+  <textarea id="check_list" rows="10" readonly></textarea>
+  <textarea id="hidden_list" style="display:none;" readonly></textarea>
 </body>
 </html>
