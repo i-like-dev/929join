@@ -74,12 +74,12 @@
     function sayParts(name) {
       const namePart = new SpeechSynthesisUtterance(name);
       namePart.lang = 'zh-TW';
-      namePart.rate = 1.1;
+      namePart.rate = 1.0;
       if (googleVoice) namePart.voice = googleVoice;
 
       const successPart = new SpeechSynthesisUtterance("報到成功");
       successPart.lang = 'zh-TW';
-      successPart.rate = 1.0;
+      successPart.rate = 0.8;
       if (googleVoice) successPart.voice = googleVoice;
 
       speechSynthesis.speak(namePart);
